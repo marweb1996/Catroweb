@@ -54,11 +54,13 @@ class WebviewJWTAuthenticator extends JWTTokenAuthenticator
   }
 
   /**
+   * @psalm-suppress ParamNameMismatch
+   *
    * @throws HttpException
    *
    * @return Response|void|null
    */
-  public function onAuthenticationFailure(Request $request, AuthenticationException $authException)
+  public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
     throw new HttpException(Response::HTTP_UNAUTHORIZED, $this->translator->trans('errors.authentication.webview', [], 'catroweb'), null, [], 0);
   }
