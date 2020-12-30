@@ -106,7 +106,6 @@ class GetFeaturedTest extends TestCase
   }
 
   /**
-   * @param int $id
    * @param MockObject|Program $program
    *
    * @return FeaturedProgram|MockObject
