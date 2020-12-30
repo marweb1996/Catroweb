@@ -25,7 +25,7 @@ class GetFeaturedTest extends TestCase
   /**
    * @var MockObject|ProjectsApi
    */
-  private ProjectsApi $project_api;
+  private $project_api;
 
   private FeaturedProgram $featured_project1;
   private FeaturedProgram $featured_project2;
@@ -48,7 +48,7 @@ class GetFeaturedTest extends TestCase
       1,
       $this->mockProgram('777', 'Tic-Tac-Toe', 'Catroweb')
     );
-    
+
     $this->featured_project2 = $this->mockFeaturedProgram(
       2,
       $this->mockProgram('Abc-123', 'Pacman', 'Steve')
@@ -106,11 +106,12 @@ class GetFeaturedTest extends TestCase
   }
 
   /**
+   * @param int $id
    * @param MockObject|Program $program
    *
    * @return FeaturedProgram|MockObject
    */
-  private function mockFeaturedProgram(int $id, Program $program)
+  private function mockFeaturedProgram(int $id, $program)
   {
     $featured_project = $this->createMock(FeaturedProgram::class);
 
@@ -128,16 +129,16 @@ class GetFeaturedTest extends TestCase
    *
    * @return FeaturedProjectResponse|MockObject
    */
-  private function mockFeaturedProgramResponse(FeaturedProgram $featured_program)
+  private function mockFeaturedProgramResponse($featured_program)
   {
     $featured_project_response = $this->createMock(FeaturedProjectResponse::class);
 
     PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'id', $featured_program->getId());
     PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'project_id', $featured_program->getProgram()->getId());
-    PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'project_url', 'http://localhost:8080/app/project/6a306940-4445-11eb-9fc1-0242ac120004');                                      //TODO!
+    PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'project_url', 'http://localhost:8080/app/project/6a306940-4445-11eb-9fc1-0242ac120004');
     PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'name', $featured_program->getProgram()->getName());
     PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'author', $featured_program->getProgram()->getUser()->getUsername());
-    PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'featured_image', 'http://localhost:8080/resources/featured/featured.png');                                   //TODO!
+    PHPUnitUtils::mockProperty(FeaturedProjectResponse::class, $featured_project_response, 'featured_image', 'http://localhost:8080/resources/featured/featured.png');
 
     return $featured_project_response;
   }
